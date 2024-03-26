@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PhaseDetails from "./PhaseDetails";
 
 const Submenu = ({ menuItems, bgColor }) => {
@@ -6,6 +6,7 @@ const Submenu = ({ menuItems, bgColor }) => {
   const [singleItem, setSingleItem] = useState(false);
   const [showSubItemsIndex, setShowSubItemsIndex] = useState([]);
   const [showSubPhaseIndex, setShowSubPhaseIndex] = useState(-1);
+  const [phaseTimeout, setPhaseTimeout] = useState(null); 
 
   const handleShowSubItemsIndex = (index) => {
     showSubItemsIndex.includes(index)
@@ -16,14 +17,15 @@ const Submenu = ({ menuItems, bgColor }) => {
           return [...prev, index];
         });
   };
+
   const handleShowSubPhaseIndex = (index) => {
-    setTimeout(()=>{
-      showSubPhaseIndex === index
-      ? setShowSubPhaseIndex(-1)
-      : setShowSubPhaseIndex(index);
-    }, 1000)
+    setPhaseTimeout(setTimeout(() => {
+      setShowSubPhaseIndex(index);
+    }, 1000));
   };
+
   const handleShowSubPhaseLeave = () => {
+    clearTimeout(phaseTimeout);
     setShowSubPhaseIndex(-1);
   };
 
@@ -45,7 +47,7 @@ const Submenu = ({ menuItems, bgColor }) => {
               style={{ backgroundColor: bgColor }}
               onClick={() => handleShowSubItemsIndex(index)}
               onMouseEnter={() => handleShowSubPhaseIndex(index)}
-              onMouseLeave={() => handleShowSubPhaseLeave()}
+              onMouseLeave={handleShowSubPhaseLeave}
             >
               <span>{item.text}</span>
               {showSubPhaseIndex === index && item.data && (
