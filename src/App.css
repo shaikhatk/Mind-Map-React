@@ -10,6 +10,7 @@
 .sub-menu {
   display: flex;
   position: relative;
+  z-index: 1;
 }
 .item {
   display: flex;
@@ -57,20 +58,21 @@
   padding: 10px;
   cursor: pointer;
   position: relative;
-  transition: box-shadow 0.3s ease, transform 0.3s ease; 
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  z-index: 100;
 }
 
 .details:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
-  transform: scale(1.1); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
 }
 
 .phase-data {
   position: absolute;
   background: #ffff;
   border: 1px solid black;
-  z-index: 10;
   right: 0;
+  z-index: 101;
 }
 
 .sub-menu::before {
@@ -82,7 +84,6 @@
   left: 50%;
   margin: 0 auto;
   top: -30px;
-
 }
 .sub-menu.single::before {
   height: 0px;
@@ -95,7 +96,6 @@
   position: absolute;
   left: 50%;
   margin: 0 auto;
-
 }
 .menu.sub-menu.single {
   margin-top: -30px;

@@ -22,6 +22,7 @@ export default function PhaseDetails({ phaseData }) {
         bottom: 5,
       }}
       barSize={10}
+      style={{ zIndex: 100 }}
     >
       <XAxis
         dataKey="name"
